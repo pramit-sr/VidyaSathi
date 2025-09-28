@@ -24,8 +24,15 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+// CORS configuration for production and development
+const allowedOrigins = [
+  "http://localhost:5173", // Development
+  process.env.FRONTEND_URL, // Production frontend URL
+  "https://*.vercel.app" // Vercel domains
+].filter(Boolean); // Remove undefined values
+
 app.use(cors({
-  origin: ["http://localhost:5173", "https://your-frontend-domain.com"], // Add your deployed frontend URL here
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
