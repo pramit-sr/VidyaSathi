@@ -26,13 +26,15 @@ app.use(
 );
 // CORS configuration for production and development
 const allowedOrigins = [
-  "http://localhost:5173", // Development
+  // "http://localhost:5173", // Development
   process.env.FRONTEND_URL, // Production frontend URL
-  "https://*.vercel.app" // Vercel domains
+  /^https:\/\/.*\.vercel\.app$/, // All Vercel domains
+  /^https:\/\/.*\.vercel\.app\/$/, // All Vercel domains with trailing slash
 ].filter(Boolean); // Remove undefined values
 
+// Temporary permissive CORS for debugging
 app.use(cors({
-  origin: allowedOrigins,
+  origin: true, // Allow all origins temporarily
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
