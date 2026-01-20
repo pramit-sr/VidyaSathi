@@ -1,6 +1,8 @@
 import { Course } from "../models/course.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import { Purchase } from "../models/purchase.model.js";
+import Stripe from "stripe";
+import config from "../config.js";
 
 export const createCourse = async (req, res) => {
   const adminId = req.adminId;
@@ -132,10 +134,18 @@ export const courseDetails = async (req, res) => {
   }
 };
 
-import Stripe from "stripe";
-import config from "../config.js";
-const stripe = new Stripe(config.STRIPE_SECRET_KEY);
-console.log(config.STRIPE_SECRET_KEY);
+// Lazy initialization of Stripe to avoid errors if key is not set
+let stripe = null;
+const getStripe = () => {
+  if (!stripe) {
+    if (!config.STRIPE_SECRET_KEY) {
+      throw new Error("STRIPE_SECRET_KEY is not configured in environment variables");
+    }
+    stripe = new Stripe(config.STRIPE_SECRET_KEY);
+  }
+  return stripe;
+};
+
 export const buyCourses = async (req, res) => {
   const { userId } = req;
   const { courseId } = req.params;
@@ -154,7 +164,8 @@ export const buyCourses = async (req, res) => {
 
     // stripe payment code goes here!!
     const amount = course.price;
-    const paymentIntent = await stripe.paymentIntents.create({
+    const stripeInstance = getStripe();
+    const paymentIntent = await stripeInstance.paymentIntents.create({
       amount: amount,
       currency: "usd",
       payment_method_types: ["card"],

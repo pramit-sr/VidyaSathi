@@ -15,8 +15,19 @@ function userMiddleware(req, res, next) {
     req.userId = decoded.id;
     next();
   } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      return res
+        .status(401)
+        .json({ errors: "Token expired. Please login again.", expired: true });
+    }
+
+    if (error.name === "JsonWebTokenError") {
+      console.error("Error in user middleware: Invalid token format");
+      return res.status(401).json({ errors: "Invalid token" });
+    }
+
     console.error("Error in user middleware:", error.message);
-    return res.status(401).json({ errors: "Invalid token or expired" });
+    return res.status(401).json({ errors: "Authentication failed" });
   }
 }
 

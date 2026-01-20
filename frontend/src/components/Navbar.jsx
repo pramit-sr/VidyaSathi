@@ -24,7 +24,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-md py-4 px-6 md:px-10 flex items-center justify-between">
       {/* Logo */}
       <Link to="/" className="text-2xl font-bold text-green-700">
-        KnowledgePulse
+        VidyaSathi
       </Link>
 
       {/* Search Bar */}
@@ -44,6 +44,16 @@ const Navbar = () => {
         <Link to="/courses" className="text-gray-700 hover:text-green-700">
           Courses
         </Link>
+        {isAuthenticated && (
+          <>
+            <Link to="/quiz" className="text-gray-700 hover:text-green-700">
+              Quiz
+            </Link>
+            <Link to="/analytics" className="text-gray-700 hover:text-green-700">
+              Analytics
+            </Link>
+          </>
+        )}
         <Link to="/pages" className="text-gray-700 hover:text-green-700">
           Pages
         </Link>

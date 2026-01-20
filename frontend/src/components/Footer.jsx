@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Brand Section */}
         <div className="flex flex-col items-center md:items-start">
           <Link to="/" className="text-2xl font-bold text-green-700">
-            KnowledgePulse
+            VidyaSathi
           </Link>
           <p className="mt-2 text-gray-600 text-center md:text-left">
             Empowering education with innovation.
@@ -54,7 +54,7 @@ const Footer = () => {
             </a>
           </div>
           <p className="mt-4 text-sm text-gray-500">
-            &copy; 2025 KnowledgePulse. All rights reserved.
+            &copy; 2025 VidyaSathi. All rights reserved.
           </p>
         </div>
 

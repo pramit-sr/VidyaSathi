@@ -6,7 +6,7 @@ const Hero = () => {
     <section className="bg-green-900 text-white py-16 px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between">
       {/* Left Section - Text Content */}
       <div className="max-w-xl">
-        <h2 className="text-lg tracking-widest font-semibold">KNOWLEDGEPULSE</h2>
+        <h2 className="text-lg tracking-widest font-semibold">VIDYASATHI</h2>
         <h1 className="text-4xl md:text-5xl font-bold mt-4">
           Knowledge Meets <br /> Innovation
         </h1>

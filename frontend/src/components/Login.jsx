@@ -16,6 +16,7 @@ function Login() {
     e.preventDefault();
 
     try {
+      console.log("Attempting login to:", `${BACKEND_URL}/user/login`);
       const response = await axios.post(
         `${BACKEND_URL}/user/login`,
         { email, password },
@@ -29,8 +30,15 @@ function Login() {
       localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/");
     } catch (error) {
+      console.error("Login error:", error);
       if (error.response) {
         setErrorMessage(error.response.data.errors || "Login failed!!!");
+      } else if (error.request) {
+        setErrorMessage("Cannot connect to server. Please check if the backend is running.");
+        toast.error("Cannot connect to server. Please check if the backend is running.");
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again.");
+        toast.error("An unexpected error occurred. Please try again.");
       }
     }
   };
@@ -42,7 +50,7 @@ function Login() {
               <div className="flex items-center space-x-2">
                 {/* <img src={logo} alt="Logo" className="w-10 h-10 rounded-full" /> */}
                 <Link to="/" className="text-xl font-bold text-green-400">
-                  KnowledgePlus
+                  VidyaSathi
                 </Link>
               </div>
               <div className="flex items-center space-x-4">
@@ -62,7 +70,7 @@ function Login() {
             </header>
       <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-[500px]">
         <h2 className="text-2xl font-bold mb-4 text-center">
-          Welcome to <span className="text-green-500">Knowledgeplus</span>
+          Welcome to <span className="text-green-500">VidyaSathi</span>
         </h2>
         <p className="text-center text-gray-400 mb-4">
           Log in to access paid content!

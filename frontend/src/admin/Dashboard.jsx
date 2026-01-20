@@ -50,6 +50,14 @@ function Dashboard() {
             </li>
             <li>
               <Link
+                to="/admin/create-topic"
+                className="text-gray-700 hover:text-blue-500 font-medium"
+              >
+                Create Topic
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/"
                 className="text-gray-700 hover:text-red-500 font-medium"
               >

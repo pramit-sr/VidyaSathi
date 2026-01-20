@@ -40,7 +40,7 @@ function Signup() {
               <div className="flex items-center space-x-2">
                 {/* <img src={logo} alt="Logo" className="w-10 h-10 rounded-full" /> */}
                 <Link to="/" className="text-xl font-bold text-green-400">
-                  KnowledgePlus
+                  VidyaSathi
                 </Link>
               </div>
               <div className="flex items-center space-x-4">
@@ -60,7 +60,7 @@ function Signup() {
             </header>
       <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-[500px]">
         <h2 className="text-2xl font-bold mb-4 text-center">
-          Join <span className="text-green-500">Knowledgeplus</span> Today!
+          Join <span className="text-green-500">VidyaSathi</span> Today!
         </h2>
         <p className="text-center text-gray-400 mb-4">Create an account to start learning.</p>
 

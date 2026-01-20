@@ -7,6 +7,8 @@ import courseRoute from "./routes/course.route.js";
 import userRoute from "./routes/user.route.js";
 import adminRoute from "./routes/admin.route.js";
 import orderRoute from "./routes/order.route.js";
+import quizRoute from "./routes/quiz.route.js";
+import topicRoute from "./routes/topic.route.js";
 
 import cors from "cors";
 import fileUpload from "express-fileupload";
@@ -26,7 +28,7 @@ app.use(
 );
 // CORS configuration for production and development
 const allowedOrigins = [
-  // "http://localhost:5173", // Development
+  "http://localhost:5173", // Development
   process.env.FRONTEND_URL, // Production frontend URL
   /^https:\/\/.*\.vercel\.app$/, // All Vercel domains
   /^https:\/\/.*\.vercel\.app\/$/, // All Vercel domains with trailing slash
@@ -39,7 +41,7 @@ app.use(cors({
   credentials: true
 }));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4003;
 const DB_URI = process.env.MONGO_URI;
 
 try {
@@ -49,11 +51,18 @@ try {
   console.log(error);
 }
 
+// Health check endpoint
+app.get("/api/v1/health", (req, res) => {
+  res.status(200).json({ message: "Backend is running", port });
+});
+
 // defining routes
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/order", orderRoute);
+app.use("/api/v1/quiz", quizRoute);
+app.use("/api/v1/topic", topicRoute);
 
 // Cloudinary configuration code
 cloudinary.config({
