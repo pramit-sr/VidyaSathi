@@ -1,7 +1,11 @@
 import axios from "axios";
 
+// Prefer environment override; default to deployed Render backend so Vercel
+// builds work without extra config. For local dev, set
+// VITE_BACKEND_URL=http://localhost:4003/api/v1 in frontend/.env.
 export const BACKEND_URL =
-  import.meta.env.VITE_BACKEND_URL || "http://localhost:4003/api/v1";
+  import.meta.env.VITE_BACKEND_URL ||
+  "https://vidyasathi-backend.onrender.com/api/v1";
 
 // Global response interceptor to handle auth failures consistently
 axios.interceptors.response.use(
